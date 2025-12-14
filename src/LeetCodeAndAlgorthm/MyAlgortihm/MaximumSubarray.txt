@@ -1,0 +1,130 @@
+# Re-create the PDF with English explanations
+
+# Extended English explanation
+extended_intro_text_en = (
+    "This document provides a step-by-step explanation and Java implementation "
+    "of the 'Maximum Subarray Problem'. This algorithm uses the divide-and-conquer "
+    "approach to find the subarray with the largest sum in a given array.\n\n"
+    "There are two main functions used for this problem:\n"
+    "1. findMaximumSubarray: This function divides the array using divide-and-conquer "
+    "approach to find the maximum subarray.\n"
+    "2. findMaxCrossingSubarray: This function finds the maximum subarray that crosses "
+    "the midpoint of the array.\n\n"
+    "Explanation of the Code:\n\n"
+    "1. findMaximumSubarray Function:\n"
+    "- This function works based on the divide-and-conquer principle.\n"
+    "- Base Case: If the array has only one element, that element itself is the maximum subarray.\n"
+    "- Recursive Division: The array is divided into two halves, and the maximum subarrays in the left, "
+    "right, and crossing the midpoint are calculated.\n"
+    "- Comparison and Merge: The function compares the sums of the left, right, and crossing subarrays "
+    "and returns the one with the largest sum.\n\n"
+    "2. findMaxCrossingSubarray Function:\n"
+    "- This function finds the maximum subarray that includes the midpoint.\n"
+    "- Left Maximum Sum: It calculates the maximum sum by going from the midpoint to the left.\n"
+    "- Right Maximum Sum: It calculates the maximum sum by going from the midpoint to the right.\n"
+    "- Result: Returns the sum of the largest left and right sums.\n\n"
+)
+
+
+public class MaximumSubarray {
+
+    // Function to find the maximum subarray
+    public static int[] findMaximumSubarray(int[] A, int low, int high) {
+        if (high == low) {  // Base case: only one element
+            return new int[]{low, high, A[low]};
+        } else {
+            int mid = (low + high) / 2;
+
+            int[] leftResult = findMaximumSubarray(A, low, mid);
+            int[] rightResult = findMaximumSubarray(A, mid + 1, high);
+            int[] crossResult = findMaxCrossingSubarray(A, low, mid, high);
+
+            // Compare left, right, and crossing results and return the largest
+            if (leftResult[2] >= rightResult[2] && leftResult[2] >= crossResult[2]) {
+                return leftResult;
+            } else if (rightResult[2] >= leftResult[2] && rightResult[2] >= crossResult[2]) {
+                return rightResult;
+            } else {
+                return crossResult;
+            }
+        }
+    }
+
+    // Function to find the maximum subarray crossing the midpoint
+    public static int[] findMaxCrossingSubarray(int[] A, int low, int mid, int high) {
+        int leftSum = Integer.MIN_VALUE;
+        int sum = 0;
+        int maxLeft = mid;
+
+        // Calculate the maximum sum going left from the midpoint
+        for (int i = mid; i >= low; i--) {
+            sum += A[i];
+            if (sum > leftSum) {
+                leftSum = sum;
+                maxLeft = i;
+            }
+        }
+
+        int rightSum = Integer.MIN_VALUE;
+        sum = 0;
+        int maxRight = mid + 1;
+
+        // Calculate the maximum sum going right from the midpoint
+        for (int j = mid + 1; j <= high; j++) {
+            sum += A[j];
+            if (sum > rightSum) {
+                rightSum = sum;
+                maxRight = j;
+            }
+        }
+
+        // Return result based on the largest sum across left and right
+        if (leftSum >= rightSum) {
+            return new int[]{maxLeft, mid, leftSum};
+        } else {
+            return new int[]{mid + 1, maxRight, rightSum};
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] A = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // Example array
+        int[] result = findMaximumSubarray(A, 0, A.length - 1);
+        System.out.println("Maximum Subarray Range: from " + result[0] + " to " + result[1]);
+        System.out.println("Maximum Sum: " + result[2]);
+    }
+}
+"""
+
+# Create a bilingual version of the notes in both Turkish and English
+
+bilingual_notes_text = """
+FIND-MAXIMUM-SUBARRAY Algoritmasının Tüm Elemanları Negatif Olduğunda Döndüreceği Değer
+
+- Negatif Elemanlı Diziler: Tüm elemanları negatif olan bir dizi verildiğinde, algoritma en büyük (en az negatif) değeri içeren alt diziyi bulur.
+
+- Algoritmanın Çalışma Mantığı:
+  1. Bölme Aşaması: Dizi, alt dizilere bölünür.
+  2. Taban Durum (Tek Eleman): high == low durumunda, tek bir eleman alt dizi olarak kabul edilir ve bu elemanın kendisi döndürülür.
+  3. Birleştirme Aşaması: Sol, sağ ve çapraz alt dizilerdeki toplamlar karşılaştırılır ve en yüksek toplam döndürülür.
+
+- Sonuç: Algoritma, negatif sayılar arasındaki en büyük (en az negatif) değeri içeren alt diziyi döndürür. Örneğin, [-8, -3, -6, -2, -5, -4] dizisi için [-2] döner.
+
+- Özet: Tüm elemanlar negatifse, algoritma dizideki en büyük negatif sayıyı döndürür.
+
+---
+
+What FIND-MAXIMUM-SUBARRAY Returns When All Elements Are Negative
+
+- Negative Element Arrays: When given an array where all elements are negative, the algorithm finds the subarray with the largest (least negative) value.
+
+- How the Algorithm Works:
+  1. Division Phase: The array is divided into subarrays.
+  2. Base Case (Single Element): When high == low, the subarray is considered to contain a single element, which is returned as the maximum.
+  3. Merging Phase: The sums of the left, right, and crossing subarrays are compared, and the largest sum is returned.
+
+- Result: The algorithm returns the subarray with the largest (least negative) value among the negative numbers. For example, for the array [-8, -3, -6, -2, -5, -4], it returns [-2].
+
+- Summary: If all elements are negative, the algorithm returns the largest negative number in the array.
+"""
+
+
