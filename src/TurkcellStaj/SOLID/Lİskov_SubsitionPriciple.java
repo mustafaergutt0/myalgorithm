@@ -1,6 +1,6 @@
 package TurkcellStaj.SOLID;
 
-public class Solid_SubsitionPriciple {
+public class Lİskov_SubsitionPriciple {
 
     class Bird {
         void fly() {}
