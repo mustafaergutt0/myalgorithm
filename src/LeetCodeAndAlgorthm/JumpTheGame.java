@@ -10,7 +10,7 @@ public class JumpTheGame {
 
         if (arr.length <= 1) return true;  // birden küçüksen zaten direk bir dön son indexten
 
-
+            //hey güncxelelem
         for (int i = 0; i < arr.length; i++) {
 
 
