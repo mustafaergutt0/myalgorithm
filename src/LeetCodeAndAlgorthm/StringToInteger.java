@@ -2,18 +2,49 @@ package LeetCodeAndAlgorthm;
 
 public class StringToInteger {
     public static void main(String[] args) {
+        System.out.println(myAtoi("-4255"));
 
     }
 
-    public int myAtoi(String str) {
-        char[] firstChar = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-        for (int i = 0; i < firstChar.length; i++) {
-            if (str.charAt(0) != firstChar[i]) {
-                return 0;
-            }
+     public static int myAtoi(String s) {
+      // Strig to Integer medium quesito is hard ever seen befor
+          // for negative and positive ınteger
+        int i=0;
+        int n = s.length();
+        int seen=1;
+
+        long count=0;
+        // iki tane while koyduk bir tanesi direk boşlukları temizkemk için
+
+        while(i<n && s.charAt(i)==' '){
+            i++;
+        }
+
+         if(i<n &&  (s.charAt(i)=='-'  || s.charAt(i)=='+' ) ){
+             seen = (s.charAt(i) == '-') ? -1 : 1;
+             i++;
+         }
+
+        while(i<n && Character.isDigit(s.charAt(i))){
+            int digit=s.charAt(i)-'0';
+            count=count*10+digit;
+
+            if(seen==1 && count>Integer.MAX_VALUE){
+                return Integer.MAX_VALUE;
+            }if(seen==-1 && -count<Integer.MIN_VALUE){
+                return Integer.MIN_VALUE;
+            }   // tam olarak 32 ile 36 arası senior seviye kod koyma olayı
+            i++;
 
         }
-        return  5;
+
+
+        return  (int) (count*seen);
+
+
+
+
+
     }
 }
 
