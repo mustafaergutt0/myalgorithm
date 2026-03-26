@@ -2,6 +2,7 @@ package LeetCodeAndAlgorthm;
 
 public class CountPrimes {
     static void main() {
+        System.out.println(CountPrimes(10)  );
 
     }
 
@@ -17,10 +18,9 @@ public class CountPrimes {
 
 
         for(int i=2;i<i*i;i++){
-            if(aLLPrimesInts[i]==true){
                 for (int j = i * i; j < n; j += i) {
                     aLLPrimesInts[j] = false;
-                }
+
 
             }
 

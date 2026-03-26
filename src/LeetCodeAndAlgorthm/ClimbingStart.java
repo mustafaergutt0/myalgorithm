@@ -1,0 +1,30 @@
+package LeetCodeAndAlgorthm;
+
+public class ClimbingStart {
+    static void main() {
+
+        System.out.println(ClimbgingStart(6));
+
+    }
+
+
+    static  public int ClimbgingStart(int n){
+        if(n==0){
+            return 0;
+        }if(n==1){
+            return 1;
+        }
+        int index=1;
+        int a=1;
+        int b=1;
+        int count=0;
+        while(index<n){
+            count =a+b;
+            a=b;
+            b=count;
+            index++;
+        }
+        return count;
+
+    }
+}
