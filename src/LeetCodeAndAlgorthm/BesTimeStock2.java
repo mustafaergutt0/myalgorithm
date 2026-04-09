@@ -14,6 +14,7 @@ public class BesTimeStock2 {
         int profit = 0;
         int TotalProfit=0;
         int FirstEnter=prices[0];
+        boolean TransactionOkey=true;
 
         for (int i = 1; i < prices.length-1; i++) {
             if (prices[i] > FirstEnter) {
